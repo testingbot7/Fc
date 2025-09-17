@@ -299,6 +299,8 @@ import { ShoppingCart, History, User, LogOut, Package } from 'lucide-react';
 import MedicineSearch from '../components/MedicineSearch';
 import Cart from '../components/Cart';
 
+
+
 import { CartContext } from '../context/CartContext';
 import { AuthContext } from '../context/AuthContext';
 
@@ -480,7 +482,8 @@ const CartView = () => {
 
   return (
     <div className="space-y-4">
-      {cart.map((item) => (
+    {Array.isArray(cart) && cart.length > 0 ? (
+      cart.map((item) => (
         <div key={item._id} className="flex items-center justify-between p-4 border rounded-lg">
           <div className="flex-1">
             <h3 className="font-semibold">{item.name}</h3>
@@ -509,7 +512,10 @@ const CartView = () => {
             </button>
           </div>
         </div>
-      ))}
+      ))
+    ) : (
+      <p>Your cart is empty</p>
+    )}
       
       <div className="border-t pt-4">
         <div className="flex justify-between items-center mb-4">
